@@ -4,7 +4,7 @@
 <div data-role="page">
 
    <header data-role="header" class="<?php echo $siteName; ?>">
-      <h1><?php echo ucwords($siteName).'+'; ?></h1>
+      <h1><?php echo ucwords($siteName); ?></h1>
    </header><!-- /header -->
 
    <div data-role="content">	
@@ -13,11 +13,13 @@
             foreach($feed->query->results->item as $item) {
                if ( $siteName === 'psdtuts' ) $comments = $item->comments->content;
                else $comments = $item->comments[1];
+               
+               $sUID = ($item->guid->content ? $item->guid->content : $item->guid);
             ?>
 
             <li>
               <h2>
-                  <a href="article.php?siteName=<?php echo $siteName;?>&origLink=<?php echo urlencode($item->guid->content);?>">
+                  <a href="article.php?siteName=<?php echo $siteName;?>&origLink=<?php echo urlencode( $sUID);?>">
                  <?php echo $item->title; ?>
                  </a>
               </h2>
