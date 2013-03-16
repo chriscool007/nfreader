@@ -30,9 +30,6 @@
       </ul>
    </div><!-- /content -->
 
-   <footer data-role="footer" class="<?php echo $siteName; ?>">
-      <h4> www.tutsplus.com</h4>
-   </footer>
 </div><!-- /page -->
 
 </body>

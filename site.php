@@ -1,20 +1,17 @@
-<?php include('includes/config.php'); ?> 
-<?php
-// If "siteName" isn't in the querystring, set the default site name to 'nettuts'
-$siteName = empty($_GET['siteName']) ? 'nettuts' : $_GET['siteName'];
+<?php include('includes/config.php');
 
-// For security reasons. If the string isn't a site name, just change to 
-// nettuts instead.
+$siteName = $_GET['siteName'];
+
+// For security reasons. If the string isn't a site name, goto index
 if ( !isset($siteList[$siteName]) ) {
-   $siteName = 'nettuts';
+   include('views/index.tmpl.php');
+   exit();
 }
 
 // YQL query (SELECT * from feed ... ) // Split for readability
 $path = "http://query.yahooapis.com/v1/public/yql?q=";
 $path .= urlencode("SELECT * FROM feed WHERE url='".$siteList[$siteName]."'");
 $path .= "&format=json";
-
-trigger_error($path);
 
 // Call YQL, and if the query didn't fail, cache the returned data
 $feed = file_get_contents($path, true);
